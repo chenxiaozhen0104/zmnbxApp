@@ -1,0 +1,203 @@
+body,html{
+    height: 100%;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+.weex-div.weex-ct.weex-root{
+    flex: 1;
+}
+.label{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.weex-list-inner{
+    overflow-x: hidden;
+}
+/*我的*/
+.my-repair.wx-my-repair {
+        margin-top:0;
+}
+/*下拉组件*/
+.device-tab.wx-device-tab{
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #ddd;
+}
+.select-container.wx-select-container{
+    position:fixed;
+    top:100px;
+    left:0;
+}
+/*设备*/
+.device-search1.wx-device-search,.device-search.wx-device-search {
+    background-color: white;
+}
+.device-content.wx-device-content{
+    margin-top:200px;
+    /*兼容苹果系统滑动动作不连贯问题*/
+    -webkit-overflow-scrolling: touch;
+}
+.device-head1.wx-device-head,.device-head.wx-device-head{
+    position:fixed;
+}	
+.device-head.wx-device-head{
+    border-bottom:1px solid #ccc;
+    width:750px;
+}
+.search-bg1.wx-search-bg, .search-bg.wx-search-bg{
+    border-color:#0092fc ;
+    border-width:1px ;
+    border-style:solid ;
+    background-color:transparent ;
+}
+.search-input.wx-search-input{
+    color:black;
+}
+.device-list.wx-device-list{
+    margin-top:101px;
+}
+/*工单*/
+.workOrder-body.wx-workOrder-body{
+    margin-top:105px;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+}
+.workOrder-body-order.wx-workOrder-body-order{
+    margin-top:5px;
+}
+.workOrder-hid.wx-workOrder-hid{
+    top:103px;
+    position:fixed;
+}
+.workOrder-title.wx-workOrder-title{
+    margin-top:0;
+    position:fixed;
+    top:88px;
+    left:0;
+    z-index:100;
+}
+.orderDetail-container.wx-orderDetail-container,.detail-container.wx-detail-container{
+    -webkit-overflow-scrolling: touch;
+}
+
+.basic-border.wx-basic-photo,
+.connect-top.wx-connect-top,
+.change-form.wx-change-form,
+.orderDetail-list.wx-orderDetail-list,
+.detail-content.wx-detail-content,
+.repair-content.wx-repair-content,
+.basic-photo.wx-basic-photo.basic-border{
+    margin-top:0;
+}
+.detail-content.wx-detail-content{
+    -webkit-overflow-scrolling: touch;
+}
+/*报修按钮*/
+.repair-content.wx-repair-content{
+    padding-bottom:20px;
+}
+.repair-footer.wx-repair-footer{
+    position:fixed;
+}
+.picker{
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(40, 40,40,0.6);
+}
+.label-container{
+    display:flex;
+    justify-content: flex-start;
+    align-items:center;
+}
+.picker-panel{
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    padding: 20px 20px;
+    display:flex;
+    flex-direction:column;
+    /*justify-content: center;
+    align-items:center;*/
+    overflow-y:scroll;
+    width:600px;
+}
+.picker-panel label{
+    font-size: 30px;
+    margin-bottom:20px;
+}
+/*主页面*/
+.homepage-image.wx-homepage-image{
+    top:250px;
+    z-index:10000 !important;
+}
+/*注册公司*/
+.company-name.wx-company-name.company-border{
+    margin-top:0;
+}
+/*工单详情*/
+.task.wx-task{
+    position:fixed;
+    background-color: rgba(40, 40, 40, 1);
+}
+.task-img.wx-task-img{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.task-text.wx-task-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-1044%);
+}
+/*.alert{
+    width:100px;
+    height:30px;
+    background-color:rgba(40, 40,40,0.8);
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    padding: 20px 40px; 
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    border-radius:5px;
+    z-index:1000;
+}
+.text{
+    font-size:25px;
+    color:red;
+    z-index:10000;
+}*/
+/*添加设备*/
+.equipment-content.wx-equipment-content{
+    margin-top:0;
+}
+.container.wx-container{
+    padding-top:0;
+    margin-top:0;
+}
+/*报表*/
+.web.wx-web{
+    margin-top:0;
+    width:750px;
+}
+
+.log-btn-txt.wx-log-btn-txt,
+.password-btn-text.wx-password-btn-text,
+.newText.wx-newText,
+.register-txt-register.wx-register-txt-register{
+    width: 655px;
+    height: 80px;
+}

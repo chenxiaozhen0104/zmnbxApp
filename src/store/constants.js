@@ -1,0 +1,22 @@
+export default {
+    event:{
+        USER_LOAD:'onuserload',
+        HEADER_BACK:'onheaderback',
+        DETAIL_BACK:'ondetailback',
+        ANDROID_BACK:'onandroidback'
+    },
+    store:{
+        USER:'user',
+        TOKEN:'token',
+        PAGE:'page',
+        SET_USER:'setUser',
+        SET_TOKEN:'token',
+        SET_PAGE:'setPage',
+        PUSH_PAGE:'pushPage',
+        POP_PAGE:'popPage',
+        GET_PAGE:'getPage',
+        GET_USER:'getUser',
+        GET_TOKEN:'getToken'
+    },
+    SUCCESS:'success'
+}

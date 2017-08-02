@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>啄木鸟</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="./src/weixin.css" type="text/css">
+    <!-- <style>body > div { height: 100%; }</style> -->
+    <style>
+        body::before {
+            content: "1";
+            height: 1px;
+            overflow: hidden;
+            color: transparent;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!--<script src="./assets/phantom-limb.js"></script>-->
+    <script src="./node_modules/vue/dist/vue.runtime.js"></script>
+    <script src="./node_modules/weex-vue-render/index.js"></script>
+    <script src="http://cdn.bootcss.com/fetch/2.0.3/fetch.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript">
+
+        fetch('/wx/auth/scanqrcode?url=' + window.location.href.split('#')[0], { method: 'POST' })
+            .then(function (res) {
+                wx.config({
+                    debug: false,
+                    appId: res.appId,
+                    timestamp: res.timestamp,
+                    nonceStr: res.nnonceStr,
+                    signature: res.signature,
+                    jsApiList: [
+                        "scanQRCode", "chooseImage", "uploadImage"
+                    ]
+                });
+            });
+
+
+        // 扫一扫
+        weex.registerModule('QRCodeModule', {
+            showQRCode: function (callback) {
+                wx.scanQRCode({
+                    needResult: 1,
+                    scanType: ["qrCode", "barCode"],
+                    success: function (res) {
+                        // alert(res.resultStr);
+                        callback(res.resultStr)
+                    }
+                })
+            }
+        });
+        // 选择图片上传
+        weex.registerModule('CameraModule', {
+            open: function (callback) {
+                wx.chooseImage({
+                    count: 1,
+                    sizeType: ['original', 'compressed'],
+                    sourceType: ['album', 'camera'],
+                    success: function (res) {
+                        var photo = {
+                            path: res.localIds[0]
+                        }
+                        callback(photo);
+                    }
+                });
+            }
+        })
+        // 上传图片
+        weex.registerModule('FileModule', {
+            upload: function (url, wxLocalIds, done) {
+                wx.uploadImage({
+                    localId: wxLocalIds[0],
+                    isShowProgressTips: 1,
+                    success: function (res) {
+                        // serverId是下载图片用的
+                        var sss = res.serverId;
+                        // 引入的fetch.js库
+                        fetch(url.replace('uploadimg?type=2', 'WxUploadImg') + '?serviceId=' + sss, { method: 'POST' })
+                            .then(function (res) {
+                                // 将返回的对象转化成字符串，和APP报修保持一致
+                                res.text().then(function (obj) {
+                                    done(obj);
+                                });
+                            })
+                    }
+                })
+            }
+        })
+        // 打电话
+        weex.registerModule('Communication', {
+            call: function (url) {
+                location.href = 'tel:' + url;
+            }
+        })
+        // 报修页面单选按钮
+        weex.registerModule('picker', {
+            pick: function (opt, callback) {
+                var select = document.createElement('div')
+                var oldSelect = document.querySelector('.picker-module')
+                select.setAttribute('class', 'picker picker-module')
+                select.innerHTML = '<div class="picker-panel">' + opt.items.map(function (item, index) {
+                    var s = index == opt.index ? 'checked' : ''
+                    return '<div class="label-container"><label class="label"><input type="radio" class="picker-radio" style="width:30px;height:30px" name="picker" value="' + index + '" ' + s + ' />' + item + '</label><br /></div>'
+                }).join('') + '</div>'
+
+                select.click()
+                if (oldSelect) {
+                    document.body.removeChild(oldSelect)
+                }
+                document.body.appendChild(select)
+                var radioes = document.querySelectorAll('.picker-radio');
+                for (var i = 0; i < radioes.length; i++) {
+                    radioes[i].onclick = function () {
+                        callback({ result: 'success', data: this.value })
+                        select.remove()
+                    }
+                }
+            }
+        })
+    </script>
+    <script src="./dist/app.web.js"></script>
+</body>
+
+</html>
